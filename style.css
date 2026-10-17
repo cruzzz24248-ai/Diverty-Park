@@ -276,7 +276,9 @@ body.lock .logo__p{background:#fff;color:var(--blue)}
   .hero__btns{flex-direction:column;gap:.6rem}
   .hero__btns .btn{width:100%;justify-content:center;min-height:50px;font-size:1rem}
   .d1,.d2,.bl1{display:none}.d3{left:5%;bottom:1.2rem}.bl2{left:auto;right:34%}
-  .feats{grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+  .feats{grid-template-columns:1fr;gap:.7rem}
+  .feats li{flex-direction:row;align-items:center;gap:.9rem;padding:.7rem 1rem;border-radius:18px;background:var(--bg);font-size:.95rem}
+  .feats .ic{width:2.7rem;height:2.7rem;padding:.6rem;border-radius:50%;background:#fff;box-shadow:0 6px 14px -8px rgba(11,61,145,.5);animation:none}
   .games{gap:.8rem}
   .game h3{font-size:.95rem}
   .cards3{grid-template-columns:1fr}
