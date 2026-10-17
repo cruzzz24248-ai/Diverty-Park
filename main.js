@@ -55,7 +55,7 @@
 
   /* ===== Link activo según la sección (solo secciones que tienen link en el menú) ===== */
   const links = $$('.nav__links a');
-  const targets = $$('main section[id], #ubicacion').filter(t => links.some(l => l.getAttribute('href') === '#' + t.id));
+  const targets = $$('main section[id]').filter(t => links.some(l => l.getAttribute('href') === '#' + t.id));
   if (targets.length) {
     const spy = new IntersectionObserver((entries) => {
       entries.forEach(en => {
