@@ -5,12 +5,12 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ===== WhatsApp: cambiá el número acá y se actualizan todos los botones ===== */
-  const WA_NUMBER = '549351XXXXXXX'; // 54 + 9 + código de área sin 0 + número sin 15
+  const WA_NUMBER = '5493516419474'; // 54 + 9 + código de área sin 0 + número sin 15
   $$('a[href*="wa.me/"]').forEach(a => a.setAttribute('href', a.getAttribute('href').replace(/wa\.me\/[0-9X]+/, 'wa.me/' + WA_NUMBER)));
 
   /* ===== Instagram: poné el usuario acá (sin @) y se actualizan todos los links ===== */
-  const IG_USER = ''; // ej: 'divertypark' → https://instagram.com/divertypark
-  if (IG_USER) $$('a[data-ig]').forEach(a => a.setAttribute('href', 'https://instagram.com/' + IG_USER));
+  const IG_USER = 'diverty.park_';
+  if (IG_USER) $$('a[data-ig]').forEach(a => a.setAttribute('href', 'https://www.instagram.com/' + IG_USER));
 
   /* ===== Navbar: sombra al scrollear ===== */
   const nav = $('#nav');
@@ -84,6 +84,31 @@
       btn.setAttribute('aria-expanded', open);
     });
   });
+
+  /* ===== Visor de fotos (galería y salas) ===== */
+  const lb = document.createElement('div');
+  lb.className = 'lb';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-label', 'Foto ampliada');
+  lb.innerHTML = '<button class="lb__x" type="button" aria-label="Cerrar">×</button><img alt="">';
+  document.body.appendChild(lb);
+  const lbImg = $('img', lb);
+  const closeLb = () => { lb.classList.remove('open'); document.body.classList.remove('lock'); };
+  $$('.gal__g .photo, .sala .photo').forEach(p => {
+    p.tabIndex = 0;
+    const open = () => {
+      const im = $('img', p);
+      if (!im) return;
+      lbImg.src = im.currentSrc || im.src;
+      lbImg.alt = im.alt;
+      lb.classList.add('open');
+      document.body.classList.add('lock');
+    };
+    p.addEventListener('click', open);
+    p.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
+  });
+  lb.addEventListener('click', closeLb);
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
   if (reduce) return;
 
