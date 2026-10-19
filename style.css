@@ -333,11 +333,11 @@ body.lock .logo__p{background:#fff;color:var(--blue)}
 /* Logo en imagen (si img/logo.png no carga, vuelve el logo de texto) */
 .logo--img:not(.no-img){flex-direction:row;transform:none}
 .logo--img:not(.no-img):hover{transform:scale(1.05)}
-.logo--img img{height:64px;width:auto;max-width:300px}
+.logo--img img{height:180px;width:auto;max-width:300px}
 .logo--img:not(.no-img) .logo__t,.logo--img:not(.no-img) .logo__p{display:none}
 .logo--img.no-img img{display:none}
-.foot .logo--img:not(.no-img) img{height:80px}
-@media(max-width:560px){.logo--img img{height:56px;max-width:220px}.foot .logo--img:not(.no-img) img{height:72px}}
+.foot .logo--img:not(.no-img) img{height:200px}
+@media(max-width:560px){.logo--img img{height:130px;max-width:220px}.foot .logo--img:not(.no-img) img{height:150px}}
 
 /* Saltar al contenido */
 .skip{position:fixed;left:1rem;top:-5rem;z-index:300;padding:.7rem 1.2rem;border-radius:999px;background:var(--yellow);color:var(--navy);font-weight:800;transition:top .2s}
