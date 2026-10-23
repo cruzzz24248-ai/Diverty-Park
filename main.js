@@ -12,6 +12,36 @@
   const IG_USER = 'diverty.park_';
   if (IG_USER) $$('a[data-ig]').forEach(a => a.setAttribute('href', 'https://www.instagram.com/' + IG_USER));
 
+  /* ===== Intro (telón de circo) ===== */
+  const root = document.documentElement;
+  const intro = $('#intro');
+  const hasIntro = root.classList.contains('has-intro') && intro;
+  if (hasIntro) {
+    const blocked = $$('.nav, main, .foot, .fab');
+    blocked.forEach(el => { el.inert = true; });
+    let done = false;
+    const end = () => {
+      if (done) return;
+      done = true;
+      blocked.forEach(el => { el.inert = false; });
+      root.classList.remove('has-intro');
+      intro.remove();
+      try { sessionStorage.setItem('dp_intro', '1'); } catch (e) {}
+      document.dispatchEvent(new Event('intro:open'));
+    };
+    const skip = () => { intro.classList.add('is-skip'); document.dispatchEvent(new Event('intro:open')); };
+    const btn = $('#introSkip');
+    btn.addEventListener('click', e => { e.stopPropagation(); skip(); });
+    intro.addEventListener('click', skip);
+    addEventListener('keydown', e => { if (e.key === 'Escape') skip(); });
+    intro.addEventListener('animationend', e => {
+      if (e.target === intro && /^intro(Out|Skip)$/.test(e.animationName)) end();
+    });
+    setTimeout(() => document.dispatchEvent(new Event('intro:open')), 2100); // el contenido aparece cuando el telón empieza a abrirse
+    setTimeout(end, 5000); // seguro: pase lo que pase, la intro nunca se queda trabada
+    btn.focus({ preventScroll: true });
+  }
+
   /* ===== Navbar: sombra al scrollear ===== */
   const nav = $('#nav');
   if (nav) {
@@ -51,7 +81,8 @@
       if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
     });
   }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
-  $$('.reveal').forEach(el => io.observe(el));
+  const startReveal = () => $$('.reveal').forEach(el => io.observe(el));
+  if (hasIntro) document.addEventListener('intro:open', startReveal, { once: true }); else startReveal();
 
   /* ===== Link activo según la sección (solo secciones que tienen link en el menú) ===== */
   const links = $$('.nav__links a');
