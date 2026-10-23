@@ -29,9 +29,13 @@
       try { sessionStorage.setItem('dp_intro', '1'); } catch (e) {}
       document.dispatchEvent(new Event('intro:open'));
     };
-    const skip = () => { intro.classList.add('is-skip'); document.dispatchEvent(new Event('intro:open')); };
-    const btn = $('#introSkip');
-    btn.addEventListener('click', e => { e.stopPropagation(); skip(); });
+    const t0 = performance.now();
+    // Al tocar, el telón se abre más rápido (si ya se estaba abriendo, sigue solo)
+    const skip = () => {
+      if (intro.classList.contains('is-skip') || performance.now() - t0 > 1900) return;
+      intro.classList.add('is-skip');
+      document.dispatchEvent(new Event('intro:open'));
+    };
     intro.addEventListener('click', skip);
     addEventListener('keydown', e => { if (e.key === 'Escape') skip(); });
     intro.addEventListener('animationend', e => {
@@ -39,7 +43,6 @@
     });
     setTimeout(() => document.dispatchEvent(new Event('intro:open')), 2100); // el contenido aparece cuando el telón empieza a abrirse
     setTimeout(end, 5000); // seguro: pase lo que pase, la intro nunca se queda trabada
-    btn.focus({ preventScroll: true });
   }
 
   /* ===== Navbar: sombra al scrollear ===== */

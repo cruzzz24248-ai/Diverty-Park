@@ -351,7 +351,11 @@ body.lock .logo__p{background:#fff;color:var(--blue)}
 .intro{display:none}
 .has-intro .intro{display:block;position:fixed;inset:0;z-index:500;overflow:hidden;animation:introOut .4s ease 3.2s forwards}
 .has-intro,.has-intro body{overflow:hidden}
-.intro.is-skip{animation:introSkip .35s ease forwards}
+.intro.is-skip{animation:introSkip .3s ease .55s forwards}
+.is-skip .intro__c--l{animation:curLq .55s cubic-bezier(.7,0,.2,1) forwards}
+.is-skip .intro__c--r{animation:curRq .55s cubic-bezier(.7,0,.2,1) forwards}
+.is-skip .intro__valance{animation:valUpq .45s cubic-bezier(.7,0,.2,1) forwards}
+.is-skip .intro__stage{animation:stageOutq .3s ease forwards}
 .intro__c{position:absolute;top:0;bottom:0;width:50.5%;background:repeating-linear-gradient(90deg,#0B3D91 0,#1B6FD1 30px,#0B3D91 60px);box-shadow:0 0 40px rgba(0,0,0,.45)}
 .intro__c::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.12),transparent 30%,rgba(0,0,20,.35))}
 .intro__c--l{left:0;animation:curL 1s cubic-bezier(.7,0,.2,1) 1.95s forwards}
@@ -365,8 +369,6 @@ body.lock .logo__p{background:#fff;color:var(--blue)}
 .intro__s{position:absolute;width:var(--s);height:var(--s);fill:var(--c);animation:starIn .6s var(--ease) var(--d) both,spin 6s linear var(--d) infinite}
 .intro__cf{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .intro__cf i{position:absolute;top:-5vh;left:var(--x);width:var(--w);height:var(--w);background:var(--c);border-radius:2px;animation:fall 2.2s linear var(--d) both}
-.intro__skip{position:absolute;z-index:4;top:max(1rem,env(safe-area-inset-top));right:max(1rem,env(safe-area-inset-right));padding:.55rem 1.1rem;border-radius:999px;background:#fff;color:var(--blue);font:800 .85rem var(--b);box-shadow:0 6px 16px -6px rgba(0,0,0,.5);animation:introUp .5s ease .5s both,btnOut .3s ease 1.9s forwards}
-.intro__skip:active{transform:scale(.94)}
 @keyframes curL{to{transform:translateX(-102%)}}
 @keyframes curR{to{transform:translateX(102%)}}
 @keyframes valUp{to{transform:translateY(-110%)}}
@@ -375,8 +377,11 @@ body.lock .logo__p{background:#fff;color:var(--blue)}
 @keyframes starIn{from{opacity:0;scale:0}to{opacity:1;scale:1}}
 @keyframes introUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @keyframes fall{from{transform:translateY(0) rotate(0)}to{transform:translateY(112vh) rotate(720deg)}}
-@keyframes btnOut{to{opacity:0;visibility:hidden}}
 @keyframes introOut{to{opacity:0;visibility:hidden}}
+@keyframes curLq{to{transform:translateX(-102%)}}
+@keyframes curRq{to{transform:translateX(102%)}}
+@keyframes valUpq{to{transform:translateY(-110%)}}
+@keyframes stageOutq{to{opacity:0;transform:scale(1.2)}}
 @keyframes introSkip{to{opacity:0;visibility:hidden}}
 .lite .intro__cf i:nth-child(n+9){display:none}
 .lite .intro__s{animation:starIn .6s var(--ease) var(--d) both}
