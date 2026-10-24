@@ -386,3 +386,6 @@ body.lock .logo__p{background:#fff;color:var(--blue)}
 .lite .intro__cf i:nth-child(n+9){display:none}
 .lite .intro__s{animation:starIn .6s var(--ease) var(--d) both}
 @media(max-width:560px){.intro__valance{height:52px;background-size:96px 52px}}
+
+/* La foto principal (LCP) se pinta ya mismo debajo de la intro: así la intro no retrasa la métrica de carga */
+.has-intro .hero__img.reveal{opacity:1;transform:none;transition:none}
